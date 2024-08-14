@@ -45,7 +45,7 @@ jobs:
     # 第五步：构建二进制文件
     - name: Build binary
       run: |
-        go build -o myapp
+        go build -o myapp ./cmd/app.go 
 
     # 第六步：（可选）部署到服务器或发布二进制文件
     # 可以根据项目需求添加，例如：
