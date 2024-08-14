@@ -1,0 +1,59 @@
+name: Go CI/CD
+
+# 触发工作流的事件
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+# 定义工作流中的各个作业
+jobs:
+  build:
+
+    # 运行的操作系统环境
+    runs-on: ubuntu-latest
+
+    # 设置 Go 版本（根据需要调整版本号）
+    env:
+      GO_VERSION: 1.20
+
+    steps:
+    # 第一步：检出代码
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    # 第二步：设置 Go 环境
+    - name: Set up Go
+      uses: actions/setup-go@v4
+      with:
+        go-version: ${{ env.GO_VERSION }}
+
+    # 第三步：安装依赖
+    - name: Install dependencies
+      run: |
+        go mod download
+
+    # 第四步：运行测试
+    - name: Run tests
+      run: |
+        go test -v ./...
+
+    # 第五步：构建二进制文件
+    - name: Build binary
+      run: |
+        go build -o myapp
+
+    # 第六步：（可选）部署到服务器或发布二进制文件
+    # 可以根据项目需求添加，例如：
+    # - name: Deploy to server
+    #   run: |
+    #     scp myapp user@server:/path/to/deploy
+
+    # - name: Publish release
+    #   uses: softprops/action-gh-release@v1
+    #   with:
+    #     files: myapp
+
