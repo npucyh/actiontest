@@ -18,7 +18,7 @@ jobs:
 
     # 设置 Go 版本（根据需要调整版本号）
     env:
-      GO_VERSION: "1.20"
+      GO_VERSION: "1.22"
 
     steps:
     # 第一步：检出代码
