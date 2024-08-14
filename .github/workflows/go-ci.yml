@@ -34,6 +34,7 @@ jobs:
     # 第三步：安装依赖
     - name: Install dependencies
       run: |
+        go env -w GO111MODULE=on
         go mod download
 
     # 第四步：运行测试
